@@ -12,19 +12,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -34,94 +31,60 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Row'),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.teal,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: 1 / 2,
-                  child: Container(
-                    height: double.infinity,
-                    decoration: const BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    child: const Center(
-                        child: Text(
-                      "Child 1",
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )),
-                  ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              color: Colors.red,
+              width: 100,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Image(
+                    height: 100,
+                    width: 100,
+                    image: AssetImage('assets/image/logo.jpg')),
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.yellow,
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              color: Colors.green,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.green,
+                )
+              ],
+            ),
+            Container(
+              color: Colors.blue,
+              width: 100,
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Cart'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
+      ]),
+      drawer: const SafeArea(
+        child: Drawer(
+          child: Text(
+            'Welcome to My APP',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        // child: SingleChildScrollView(
-        // child: Column(
-        //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //   children: [
-        //     for (int i = 0; i < 100; i++)
-        //       Row(
-        //         children: [
-        //           Expanded(
-        //             child: Container(
-        //               height: 100,
-        //               color: i % 2 == 0 ? Colors.white : Colors.blue,
-        //             ),
-        //           ),
-        //           Expanded(
-        //             child: Container(
-        //               height: 100,
-        //               color: i % 2 == 0 ? Colors.purple : Colors.red,
-        //             ),
-        //           ),
-        //           Expanded(
-        //             child: Container(
-        //               height: 100,
-        //               color: i % 2 == 0 ? Colors.black : Colors.orange,
-        //             ),
-        //           ),
-        //         ],
-        //       )
-        //   ],
-        // ),
-        // ),
       ),
     );
   }
