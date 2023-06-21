@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:june_20/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,15 +29,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int currentIndex = 0;
+  int numberOfProducts = 0;
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> screens = [
+      const Home(),
+      Cart(
+        numberOfProducts: numberOfProducts,
+      ),
+      const Profile()
+    ];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Row'),
         centerTitle: true,
       ),
       backgroundColor: Colors.teal,
-      body: SafeArea(
+      body: screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          onTap: (value) {
+            print(value);
+            setState(() {
+              currentIndex = value;
+            });
+          },
+          currentIndex: currentIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_bag), label: 'Cart'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
+          ]),
+      drawer: Drawer(
+          child: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -69,21 +96,17 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Cart'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
-      ]),
-      drawer: const SafeArea(
-        child: Drawer(
-          child: Text(
-            'Welcome to My APP',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+      )),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.yellow,
+        onPressed: () {
+          setState(() {
+            numberOfProducts++;
+          });
+        },
+        child: const Icon(
+          Icons.add_task_outlined,
+          color: Colors.black,
         ),
       ),
     );
