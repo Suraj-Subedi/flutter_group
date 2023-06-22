@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:june_20/home.dart';
 
+import 'drawer.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Flutter Row'),
         centerTitle: true,
       ),
-      backgroundColor: Colors.teal,
+      // backgroundColor: Colors.teal,
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
@@ -62,41 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: Icon(Icons.shopping_bag), label: 'Cart'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
           ]),
-      drawer: Drawer(
-          child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              color: Colors.red,
-              width: 100,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Image(
-                    height: 100,
-                    width: 100,
-                    image: AssetImage('assets/image/logo.jpg')),
-                Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.yellow,
-                ),
-                Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.green,
-                )
-              ],
-            ),
-            Container(
-              color: Colors.blue,
-              width: 100,
-            ),
-          ],
-        ),
-      )),
+      drawer: const Drawer(
+        child: MyDrawer(),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.yellow,
         onPressed: () {
