@@ -8,68 +8,115 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var products = [
+    {
+      "name": "Blazer",
+      "color": "red",
+    },
+    {
+      "name": "Shirt",
+      "color": "blue",
+    },
+    {
+      "name": "Pants",
+      "color": "green",
+    },
+    {
+      "name": "Shoes",
+      "color": "yellow",
+    },
+    {
+      "name": "Socks",
+      "color": "orange",
+    },
+    {
+      "name": "Tie",
+      "color": "purple",
+    },
+    {
+      "name": "Hat",
+      "color": "pink",
+    },
+    {
+      "name": "Gloves",
+      "color": "brown",
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            // Container(
-            //   height: 70,
-            //   width: double.infinity,
-            //   decoration: const BoxDecoration(
-            //     color: Colors.blue,
-            //     boxShadow: [
-            //       BoxShadow(
-            //         color: Colors.grey,
-            //         blurRadius: 10,
-            //         offset: Offset(0, 5),
-            //       ),
-            //     ],
-            //   ),
-            //   child: const Center(
-            //       child: Text(
-            //     'My Appbar',
-            //     style: TextStyle(
-            //         fontSize: 20,
-            //         fontWeight: FontWeight.bold,
-            //         color: Colors.white),
-            //   )),
-            // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  color: Colors.red,
-                  width: 100,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Image(
-                        height: 100,
-                        width: 100,
-                        image: AssetImage('assets/image/logo.jpg')),
-                    Container(
-                      height: 100,
-                      width: 100,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 100,
-                      width: 100,
-                      color: Colors.green,
-                    )
-                  ],
-                ),
-                Container(
-                  color: Colors.blue,
-                  width: 100,
-                ),
-              ],
-            ),
-          ],
+        child: ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            return ProductCard(name: products[index]['name']!);
+          },
+
+          // Container(
+          //   height: 100,
+          //   width: 300,
+          //   color: Colors.orange,
+          // )
         ),
+        // child: Column(
+        //   children: [
+        //     // Container(
+        //     //   height: 70,
+        //     //   width: double.infinity,
+        //     //   decoration: const BoxDecoration(
+        //     //     color: Colors.blue,
+        //     //     boxShadow: [
+        //     //       BoxShadow(
+        //     //         color: Colors.grey,
+        //     //         blurRadius: 10,
+        //     //         offset: Offset(0, 5),
+        //     //       ),
+        //     //     ],
+        //     //   ),
+        //     //   child: const Center(
+        //     //       child: Text(
+        //     //     'My Appbar',
+        //     //     style: TextStyle(
+        //     //         fontSize: 20,
+        //     //         fontWeight: FontWeight.bold,
+        //     //         color: Colors.white),
+        //     //   )),
+        //     // ),
+        //     Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: [
+        //         Container(
+        //           color: Colors.red,
+        //           width: 100,
+        //         ),
+        //         Column(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             const Image(
+        //                 height: 100,
+        //                 width: 100,
+        //                 image: AssetImage('assets/image/logo.jpg')),
+        //             Container(
+        //               height: 100,
+        //               width: 100,
+        //               color: Colors.yellow,
+        //             ),
+        //             Container(
+        //               height: 100,
+        //               width: 100,
+        //               color: Colors.green,
+        //             )
+        //           ],
+        //         ),
+        //         Container(
+        //           color: Colors.blue,
+        //           width: 100,
+        //         ),
+        //       ],
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
@@ -134,5 +181,53 @@ class Profile extends StatelessWidget {
             ],
           )),
         ));
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final String name;
+  const ProductCard({super.key, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(
+          color: Colors.grey,
+          blurRadius: 10,
+          offset: Offset(0, 5),
+        ),
+      ]),
+      height: 100,
+      width: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          TextButton(
+              onPressed: () {},
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: const Text(
+                  "Add to cart",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ))
+        ],
+      ),
+    );
   }
 }
