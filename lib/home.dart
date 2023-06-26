@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: SafeArea(
         child: ListView.builder(
-          itemCount: products.length,
+          itemCount: 5,
           itemBuilder: (context, index) {
             return ProductCard(name: products[index]['name']!);
           },
@@ -206,26 +207,29 @@ class ProductCard extends StatelessWidget {
         children: [
           Text(
             name,
-            style: const TextStyle(
-              fontSize: 20,
+            style: TextStyle(
+              fontFamily: GoogleFonts.permanentMarker().fontFamily,
+              fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),
-          TextButton(
-              onPressed: () {},
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: const Text(
-                  "Add to cart",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ))
+          ElevatedButton(onPressed: () {}, child: const Text("Add to cart")),
+          // TextButton(
+          //   onPressed: () {},
+          //   child: Container(
+          //     padding: const EdgeInsets.all(5),
+          //     decoration: const BoxDecoration(
+          //       color: Colors.blue,
+          //       borderRadius: BorderRadius.all(Radius.circular(10)),
+          //     ),
+          //     child: const Text(
+          //       "Add to cart",
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
