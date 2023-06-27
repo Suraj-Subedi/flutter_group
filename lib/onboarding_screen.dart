@@ -37,7 +37,7 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Text(
           "This is first page",
@@ -46,13 +46,17 @@ class FirstPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        NextButton(
-          onPressed: () {
-            pageController.animateToPage(1,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeIn);
-          },
-        )
+        Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.2),
+          child: NextButton(
+            onPressed: () {
+              pageController.animateToPage(1,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn);
+            },
+          ),
+        ),
       ],
     );
   }
@@ -110,6 +114,12 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: onPressed, child: const Text("Next"));
+    return ElevatedButton(
+      style: ButtonStyle(
+        textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 30)),
+      ),
+      onPressed: onPressed,
+      child: const Text("Next"),
+    );
   }
 }
