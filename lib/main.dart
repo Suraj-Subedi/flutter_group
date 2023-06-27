@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:june_20/home.dart';
+import 'package:june_20/onboarding_screen.dart';
 
 import 'drawer.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const OnBoardingScreen(),
     );
   }
 }
