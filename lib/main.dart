@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:june_20/home.dart';
-import 'package:june_20/onboarding_screen.dart';
 
 import 'drawer.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnBoardingScreen(),
+      home: const LoginPage(),
+      // routes: {
+      //   '/login': (context) => const LoginPage(),
+      //   '/signUp': (context) => const SignUpPage(),
+      //   '/home': (context) => const MyHomePage(),
+      // }
     );
   }
 }
