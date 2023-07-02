@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:june_20/onboarding_controller.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -8,21 +10,19 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  PageController pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
+    OnboardingController onboardingController = Get.put(OnboardingController());
     return Scaffold(
       body: SafeArea(
         child: PageView(
-          controller: pageController,
+          controller: onboardingController.pageController,
           // physics: const BouncingScrollPhysics(),
           // physics: const NeverScrollableScrollPhysics(),
-          children: [
-            FirstPage(
-              pageController: pageController,
-            ),
-            const SecondPage(),
-            const ThirdPage(),
+          children: const [
+            FirstPage(),
+            SecondPage(),
+            ThirdPage(),
           ],
         ),
       ),
@@ -31,11 +31,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 }
 
 class FirstPage extends StatelessWidget {
-  final PageController pageController;
-  const FirstPage({super.key, required this.pageController});
+  const FirstPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    OnboardingController onboardingController = Get.find();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -51,7 +51,7 @@ class FirstPage extends StatelessWidget {
               EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.2),
           child: NextButton(
             onPressed: () {
-              pageController.animateToPage(1,
+              onboardingController.pageController.animateToPage(1,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeIn);
             },

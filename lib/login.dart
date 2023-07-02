@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:june_20/components/custom_button.dart';
 import 'package:june_20/signUp.dart';
 
 class LoginPage extends StatefulWidget {
@@ -76,22 +78,36 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 25,
               ),
-              ElevatedButton(
+              CustomButton(
+                title: 'Login',
                 onPressed: () {
                   if (formKey.currentState == null) return;
                   formKey.currentState!.validate();
+
+                  Get.showSnackbar(const GetSnackBar(
+                    title: 'Login',
+                    message: 'Login successful',
+                    duration: Duration(seconds: 2),
+                    snackPosition: SnackPosition.TOP,
+                  ));
                 },
-                child: Container(
-                  margin: const EdgeInsets.all(20),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
               ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     if (formKey.currentState == null) return;
+              //     formKey.currentState!.validate();
+              //   },
+              //   child: Container(
+              //     margin: const EdgeInsets.all(20),
+              //     child: const Text(
+              //       'Login',
+              //       style: TextStyle(
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 25,
               ),
@@ -107,12 +123,13 @@ class _LoginPageState extends State<LoginPage> {
                   InkWell(
                     onTap: () {
                       // Navigator.pushNamed(context, '/signUp');
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const SignUpPage(),
+                      //   ),
+                      // );
+                      Get.to(const SignUpPage());
                     },
                     child: const Text(
                       'Sign up',
