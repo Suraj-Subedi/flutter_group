@@ -1,4 +1,4 @@
-package com.example.june_20
+package np.com.subedisuraj.flutter_ecom
 
 import io.flutter.embedding.android.FlutterActivity
 

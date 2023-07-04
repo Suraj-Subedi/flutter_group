@@ -1,4 +1,4 @@
-# june_20
+# flutter_ecom
 
 A new Flutter project.
 
