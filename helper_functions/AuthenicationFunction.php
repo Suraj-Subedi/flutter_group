@@ -8,7 +8,7 @@ function register($fullname, $email, $password)
     global $con;
 
     //encrypting the password with hashing algorithm
-    $encrypted_password = password_hash($password, PASSWORD_BCRYPT);
+    $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
 
 
     //inserting the user into the database

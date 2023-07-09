@@ -40,7 +40,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     echo json_encode(
         [
             "status" => 400,
-            "message" => "Please fill all the fields"
+            "message" => "Please fill email and password all the fields"
         ]
     );
 }
