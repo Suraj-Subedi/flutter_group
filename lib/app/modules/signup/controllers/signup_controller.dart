@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecom/app/routes/app_pages.dart';
 import 'package:flutter_ecom/app/utils/constants.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -24,13 +25,11 @@ class SignupController extends GetxController {
         });
         var data = jsonDecode(response.body);
         if (data['status'] == 200) {
-          Get.showSnackbar(GetSnackBar(
-            message: data['message'],
-          ));
+          showCustomSnackBar(message: data['message'], color: Colors.green);
+          Get.to(Routes.LOGIN);
         } else {
-          Get.showSnackbar(GetSnackBar(
-            message: data['message'],
-          ));
+          showCustomSnackBar(
+              message: data['message'], color: Colors.red, isTop: true);
         }
       }
     } catch (e) {
