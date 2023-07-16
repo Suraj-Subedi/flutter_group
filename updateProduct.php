@@ -13,49 +13,33 @@ if (isset($_POST['token'])) {
         die();
     }
     if (
+        isset($_POST['id']) &&
         isset($_POST['name']) &&
         isset($_POST['price']) &&
         isset($_POST['description']) &&
-        isset($_POST['category']) &&
-        isset($_FILES['image'])
+        isset($_POST['category'])
 
     ) {
+        $id = $_POST['id'];
         $name = $_POST['name'];
         $price = $_POST['price'];
         $description = $_POST['description'];
         $category = $_POST['category'];
-
-        //get image
-        $image = $_FILES['image']['name'];
-        $image_tmp = $_FILES['image']['tmp_name'];
-        $image_size = $_FILES['image']['size'];
-
-        if ($image_size > 5000000) {
-            echo json_encode([
-                "status" => 400,
-                "message" => "Image size should be less than 5MB"
-            ]);
-            die();
+        $image = "";
+        if (isset($_POST['image'])) {
+            $image = $_POST['image'];
         }
 
-        $image_path = "images/$image";
-
-        if (!(move_uploaded_file($image_tmp, $image_path))) {
-            echo json_encode([
-                "status" => 400,
-                "message" => "Image upload failed"
-            ]);
-            die();
-        }
+        $sql = "UPDATE products SET title='$name', price='$price', description='$description', category_id='$category', image_url='$image' WHERE product_id=" . $id;
 
 
-        $sql = "INSERT INTO products (title, price, description, category_id, image_url) VALUES ('$name', '$price', '$description', '$category', '$image_path')";
         $result = mysqli_query($con, $sql);
 
         if ($result) {
             echo json_encode([
                 "status" => 200,
-                "message" => "Product added successfully"
+                "message" => "Product updated  successfully",
+
             ]);
         } else {
             echo json_encode([
@@ -66,7 +50,7 @@ if (isset($_POST['token'])) {
     } else {
         echo json_encode([
             "status" => 400,
-            "message" => "Please fill all the fields (name, price, description, category and image)"
+            "message" => "Please fill all the fields (id,name, price, description, category and imageUrl(Optional))"
         ]);
     }
 } else {
