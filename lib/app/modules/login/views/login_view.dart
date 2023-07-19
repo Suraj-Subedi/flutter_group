@@ -21,8 +21,8 @@ class LoginView extends GetView<LoginController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  children: const [
+                const Column(
+                  children: [
                     Text(
                       "Whisper",
                       style: TextStyle(
@@ -43,8 +43,8 @@ class LoginView extends GetView<LoginController> {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Text(
                       "Enter your details:",
                       style: TextStyle(
@@ -103,6 +103,7 @@ class LoginView extends GetView<LoginController> {
                     GestureDetector(
                       onTap: () {
                         Get.toNamed(Routes.SIGNUP);
+                        Get.offAndToNamed(Routes.SIGNUP);
                       },
                       child: const Text(
                         "Sign Up",

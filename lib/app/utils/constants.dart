@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const ipAddress = "192.168.1.66";
+const ipAddress = "192.168.1.7";
 
 const baseUrl = ipAddress;
 // Obtain shared preferences.

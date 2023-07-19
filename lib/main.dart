@@ -12,7 +12,8 @@ void main() async {
   runApp(
     GetMaterialApp(
       title: "Application",
-      initialRoute: token == null ? Routes.LOGIN : Routes.HOME,
+      // home: const GetStarted(),
+      initialRoute: token == null ? Routes.LOGIN : Routes.MAIN,
       getPages: AppPages.routes,
     ),
   );

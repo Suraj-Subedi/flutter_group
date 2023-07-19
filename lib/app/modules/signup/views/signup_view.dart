@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../components/my_button.dart';
 import '../../../components/my_textfield.dart';
-import '../../../routes/app_pages.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
@@ -24,8 +23,8 @@ class SignupView extends GetView<SignupController> {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Text(
                       "Register yourself:",
                       style: TextStyle(
@@ -92,7 +91,9 @@ class SignupView extends GetView<SignupController> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(Routes.LOGIN);
+                        Get.back();
+                        // Get.toNamed(Routes.LOGIN);
+                        // Get.offAndToNamed(Routes.LOGIN);
                       },
                       child: const Text(
                         "Login",
