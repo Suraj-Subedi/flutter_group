@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const ipAddress = "192.168.1.7";
+const ipAddress = "192.168.1.66";
 
 const baseUrl = ipAddress;
 // Obtain shared preferences.
+
+var getImageUrl = (imageUrl) {
+  return 'http://$ipAddress/ecom_api/$imageUrl';
+};
 
 var showCustomSnackBar = (
         {required String message, Color? color, bool isTop = false}) =>
