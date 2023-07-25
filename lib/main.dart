@@ -13,7 +13,7 @@ void main() async {
     GetMaterialApp(
       title: "Application",
       // home: const GetStarted(),
-      initialRoute: token == null ? Routes.LOGIN : Routes.MAIN,
+      initialRoute: token == null ? Routes.LOGIN : Routes.ADMIN_MAIN,
       getPages: AppPages.routes,
     ),
   );

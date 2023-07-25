@@ -13,6 +13,8 @@ class HomeController extends GetxController {
   late final SharedPreferences sharedPref;
   List<Category>? categories;
   List<Product>? products;
+  GlobalKey<FormState> addCategoryKey = GlobalKey();
+  var titleController = TextEditingController();
 
   final count = 0.obs;
   @override
@@ -63,6 +65,32 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print(e);
+      Get.showSnackbar(const GetSnackBar(
+        message: 'Something went wrong',
+      ));
+    }
+  }
+
+  Future<void> addCategory() async {
+    try {
+      if (addCategoryKey.currentState!.validate()) {
+        var url = Uri.http(baseUrl, 'ecom_api/addCategory');
+
+        var response = await http.post(url, body: {
+          'token': sharedPref.getString('token'),
+          'title': titleController.text
+        });
+        var data = jsonDecode(response.body);
+        if (data['status'] == 200) {
+          Get.back();
+          getCategories();
+          showCustomSnackBar(message: data['message'], color: Colors.green);
+        } else {
+          showCustomSnackBar(
+              message: data['message'], color: Colors.red, isTop: true);
+        }
+      }
+    } catch (e) {
       Get.showSnackbar(const GetSnackBar(
         message: 'Something went wrong',
       ));

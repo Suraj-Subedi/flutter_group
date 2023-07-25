@@ -1,5 +1,13 @@
 import 'package:get/get.dart';
 
+import '../modules/admin_category/bindings/admin_category_binding.dart';
+import '../modules/admin_category/views/admin_category_view.dart';
+import '../modules/admin_home/bindings/admin_home_binding.dart';
+import '../modules/admin_home/views/admin_home_view.dart';
+import '../modules/admin_main/bindings/admin_main_binding.dart';
+import '../modules/admin_main/views/admin_main_view.dart';
+import '../modules/admin_orders/bindings/admin_orders_binding.dart';
+import '../modules/admin_orders/views/admin_orders_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -57,6 +65,26 @@ class AppPages {
       name: _Paths.CART,
       page: () => const CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_MAIN,
+      page: () => const AdminMainView(),
+      binding: AdminMainBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_HOME,
+      page: () => const AdminHomeView(),
+      binding: AdminHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ORDERS,
+      page: () => const AdminOrdersView(),
+      binding: AdminOrdersBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_CATEGORY,
+      page: () => const AdminCategoryView(),
+      binding: AdminCategoryBinding(),
     ),
   ];
 }
