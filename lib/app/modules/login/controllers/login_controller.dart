@@ -27,7 +27,12 @@ class LoginController extends GetxController {
       if (loginFormKey.currentState!.validate()) {
         var url = Uri.http(baseUrl, 'ecom_api/auth/login');
 
-        var response = await http.post(url, body: {
+        var response = await http.post(url, headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Allow-Control-Allow-Origin':
+              '*', // Required for CORS support to work
+        }, body: {
           'email': emailController.text,
           'password': passwordController.text
         });

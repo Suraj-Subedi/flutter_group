@@ -27,6 +27,7 @@ class HomeController extends GetxController {
   var nameController = TextEditingController();
   var priceController = TextEditingController();
   var descriptionController = TextEditingController();
+  var selectedCategory = ''.obs;
 
   final count = 0.obs;
   @override
@@ -40,6 +41,15 @@ class HomeController extends GetxController {
   void logout() {
     sharedPref.remove('token');
     Get.offAllNamed(Routes.LOGIN);
+  }
+
+  void resetProductForm() {
+    nameController.clear();
+    priceController.clear();
+    descriptionController.clear();
+    selectedCategory.value = '';
+    imageBytes.value = Uint8List(0);
+    image = null;
   }
 
   void pickImage() async {
@@ -113,6 +123,48 @@ class HomeController extends GetxController {
         if (data['status'] == 200) {
           Get.back();
           getCategories();
+          showCustomSnackBar(message: data['message'], color: Colors.green);
+        } else {
+          showCustomSnackBar(
+              message: data['message'], color: Colors.red, isTop: true);
+        }
+      }
+    } catch (e) {
+      Get.showSnackbar(const GetSnackBar(
+        message: 'Something went wrong',
+      ));
+    }
+  }
+
+  Future<void> addProduct() async {
+    try {
+      if (addProductKey.currentState!.validate()) {
+        var url = Uri.http(baseUrl, 'ecom_api/addProduct');
+
+        var form = http.MultipartRequest('POST', url);
+        form.fields['token'] = sharedPref.getString('token')!;
+        form.fields['name'] = nameController.text;
+        form.fields['price'] = priceController.text;
+        form.fields['description'] = descriptionController.text;
+        form.fields['category'] = selectedCategory.value;
+        form.files.add(http.MultipartFile.fromBytes('image', imageBytes.value,
+            filename: image!.name));
+
+        // var response = await http.post(url, body: {
+        //   'token': sharedPref.getString('token'),
+        //   'name': nameController.text,
+        //   'price': priceController.text,
+        //   'description': descriptionController.text,
+        //   'category': selectedCategory.value
+        // });
+
+        var response = await http.Response.fromStream(await form.send());
+
+        var data = jsonDecode(response.body);
+        if (data['status'] == 200) {
+          Get.back();
+          resetProductForm();
+          getProducts();
           showCustomSnackBar(message: data['message'], color: Colors.green);
         } else {
           showCustomSnackBar(

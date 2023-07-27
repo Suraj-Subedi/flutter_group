@@ -99,7 +99,7 @@ class AddCategoryPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<HomeController>();
+    var controller = Get.put(HomeController());
     return Dialog(
         insetPadding: const EdgeInsets.all(15),
         child: Padding(

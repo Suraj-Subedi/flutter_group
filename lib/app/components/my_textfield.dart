@@ -4,6 +4,7 @@ class MyTextField extends StatelessWidget {
   final String? labelText;
   final String hintText;
   final bool isPassword;
+  final bool isNumber;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   const MyTextField(
@@ -12,7 +13,8 @@ class MyTextField extends StatelessWidget {
       required this.hintText,
       this.isPassword = false,
       this.validator,
-      this.controller});
+      this.controller,
+      this.isNumber = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         validator: validator,
         obscureText: isPassword,
+        keyboardType: isNumber ? TextInputType.number : TextInputType.text,
         decoration: InputDecoration(
           labelText: labelText,
           hintText: hintText,
