@@ -20,6 +20,7 @@ class AdminMainView extends GetView<AdminMainController> {
           items: [
             FloatingNavbarItem(icon: Icons.home, title: 'Home'),
             FloatingNavbarItem(icon: Icons.list, title: 'Orders'),
+            FloatingNavbarItem(icon: Icons.shopping_bag, title: 'Products'),
             FloatingNavbarItem(icon: Icons.category, title: 'Categories'),
             FloatingNavbarItem(icon: Icons.person, title: 'Profile'),
           ],
