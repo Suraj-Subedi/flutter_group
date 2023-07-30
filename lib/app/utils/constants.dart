@@ -25,7 +25,7 @@ var showCustomSnackBar = (
         // snackPosition: isCart ? SnackPosition.TOP : SnackPosition.BOTTOM,
         duration: const Duration(seconds: 1),
         backgroundColor: color ?? Colors.red,
-        snackPosition: SnackPosition.BOTTOM
+        snackPosition: isTop ? SnackPosition.TOP : SnackPosition.BOTTOM
 
         // backgroundColor: color ?? Colors.green,
         ));

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecom/app/components/my_button.dart';
 import 'package:flutter_ecom/app/models/product.dart';
+import 'package:flutter_ecom/app/modules/cart/controllers/cart_controller.dart';
 import 'package:flutter_ecom/app/utils/constants.dart';
 
 import 'package:get/get.dart';
@@ -11,23 +13,41 @@ class ProductDetailView extends GetView<ProductDetailController> {
   @override
   Widget build(BuildContext context) {
     var product = Get.arguments as Product;
+    var cartController = Get.find<CartController>();
     return Scaffold(
         appBar: AppBar(
           title: Text(product.title ?? ''),
         ),
-        body: Column(
+        body: Stack(
           children: [
-            Expanded(
-              flex: 1,
-              child: Image.network(
-                getImageUrl(product.imageUrl),
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+            Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Image.network(
+                    getImageUrl(product.imageUrl),
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(),
+                ),
+              ],
             ),
-            Expanded(
-              flex: 2,
-              child: Container(),
+            Positioned(
+              bottom: 20,
+              child: SizedBox(
+                width: Get.width,
+                height: 75,
+                child: MyButton(
+                  title: 'Add to cart',
+                  onPressed: () {
+                    cartController.addToCart(product: product);
+                  },
+                ),
+              ),
             ),
           ],
         ));

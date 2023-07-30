@@ -27,6 +27,14 @@ class MemoryManagement {
     prefs!.setString('role', role);
   }
 
+  static String? getCart() {
+    return prefs != null ? prefs!.getString('cart') : null;
+  }
+
+  static void setCart(String cart) {
+    prefs!.setString('cart', cart);
+  }
+
   static void removeRole() {
     prefs!.remove('role');
   }
