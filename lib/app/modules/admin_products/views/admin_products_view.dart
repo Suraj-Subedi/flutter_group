@@ -172,7 +172,7 @@ class AddProductPopup extends StatelessWidget {
                         items: controller.categories!
                             .map((e) => DropdownMenuItem(
                                   value: e.categoryId,
-                                  child: Text(e.title ?? ''),
+                                  child: Text(e.categoryTitle ?? ''),
                                 ))
                             .toList(),
                         hint: const Text('Select Category'),

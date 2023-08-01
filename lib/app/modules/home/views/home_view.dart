@@ -54,7 +54,8 @@ class HomeView extends GetView<HomeController> {
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.blue.withOpacity(0.8)),
                               child: Text(
-                                controller.categories![index].title ?? '',
+                                controller.categories![index].categoryTitle ??
+                                    '',
                                 style: const TextStyle(
                                   fontSize: 17,
                                   color: Colors.white,

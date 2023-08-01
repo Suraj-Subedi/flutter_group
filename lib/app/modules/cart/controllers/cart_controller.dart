@@ -1,10 +1,51 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecom/app/models/product.dart';
 import 'package:flutter_ecom/app/utils/constants.dart';
+import 'package:flutter_ecom/app/utils/memory_management.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
   List<CartItem> cart = [];
+  Rx<double> totalAmount = 0.0.obs;
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+
+    getCart();
+  }
+
+  void updateTotalAmount() {
+    totalAmount.value = 0.0;
+    for (var element in cart) {
+      if (element.product.price == null) {
+        return;
+      }
+
+      totalAmount.value = totalAmount.value +
+          double.parse(element.product.price!) * element.quantity;
+    }
+  }
+
+  void getCart() {
+    String? cart = MemoryManagement.getCart();
+    if (cart != null) {
+      var decodedCart = jsonDecode(cart) as List;
+      this.cart = decodedCart
+          .map((e) => CartItem(
+              product: Product(
+                  productId: e['productId'],
+                  price: e['price'],
+                  title: e['title'],
+                  imageUrl: e['imageUrl']),
+              quantity: e['quantity']))
+          .toList();
+    }
+    updateTotalAmount();
+  }
 
   void addToCart({required Product product, int quantity = 1}) {
     cart.add(CartItem(product: product, quantity: quantity));
@@ -13,12 +54,28 @@ class CartController extends GetxController {
       isTop: true,
       message: 'Product added to cart',
     );
+    updateMemory();
     update();
+  }
+
+  void updateMemory() {
+    MemoryManagement.setCart(
+      jsonEncode(cart.map((e) {
+        return {
+          'productId': e.product.productId,
+          'title': e.product.title,
+          'price': e.product.price,
+          'imageUrl': e.product.imageUrl,
+          'quantity': e.quantity,
+        };
+      }).toList()),
+    );
+    updateTotalAmount();
   }
 
   void increaseQuantity(int index) {
     cart[index].quantity++;
-
+    updateMemory();
     update();
   }
 
@@ -33,6 +90,7 @@ class CartController extends GetxController {
     }
     cart[index].quantity--;
 
+    updateMemory();
     update();
   }
 
@@ -43,6 +101,7 @@ class CartController extends GetxController {
       isTop: true,
       message: 'Product removed from cart',
     );
+    updateMemory();
     update();
   }
 
@@ -53,6 +112,7 @@ class CartController extends GetxController {
       isTop: true,
       message: 'Cart cleared',
     );
+    updateMemory();
     update();
   }
 }

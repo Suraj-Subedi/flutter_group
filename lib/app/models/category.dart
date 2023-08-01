@@ -12,20 +12,20 @@ String categoryToJson(List<Category> data) =>
 
 class Category {
   final String? categoryId;
-  final String? title;
+  final String? categoryTitle;
 
   Category({
     this.categoryId,
-    this.title,
+    this.categoryTitle,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         categoryId: json["category_id"],
-        title: json["title"],
+        categoryTitle: json["category_title"],
       );
 
   Map<String, dynamic> toJson() => {
         "category_id": categoryId,
-        "title": title,
+        "category_title": categoryTitle,
       };
 }

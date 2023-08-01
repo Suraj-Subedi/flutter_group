@@ -15,13 +15,62 @@ class CartView extends GetView<CartController> {
           centerTitle: true,
         ),
         body: GetBuilder<CartController>(
-          builder: (controller) => ListView.builder(
-            padding: const EdgeInsets.all(20),
-            itemCount: controller.cart.length,
-            itemBuilder: (context, index) => CartItemCard(
-              cartItem: controller.cart[index],
-              index: index,
-            ),
+          builder: (controller) => Column(
+            children: [
+              SizedBox(
+                height: 400,
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(20),
+                  itemCount: controller.cart.length,
+                  itemBuilder: (context, index) => CartItemCard(
+                    cartItem: controller.cart[index],
+                    index: index,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(5),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      )
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Your total amount:',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Obx(
+                        () => Text(
+                          'Rs.${controller.totalAmount}',
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ));
   }

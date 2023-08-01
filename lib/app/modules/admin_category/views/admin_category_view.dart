@@ -75,7 +75,7 @@ class CategoryCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            category.title ?? '',
+            category.categoryTitle ?? '',
             style: const TextStyle(
               fontSize: 17,
               color: Colors.blue,
