@@ -5,6 +5,7 @@ import 'package:flutter_ecom/app/models/product.dart';
 import 'package:flutter_ecom/app/utils/constants.dart';
 import 'package:flutter_ecom/app/utils/memory_management.dart';
 import 'package:get/get.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 class CartController extends GetxController {
   List<CartItem> cart = [];
@@ -44,6 +45,34 @@ class CartController extends GetxController {
           .toList();
     }
     updateTotalAmount();
+  }
+
+  void order() {
+    try {
+      final config = PaymentConfig(
+        amount: 10000, // Amount should be in paisa
+        productIdentity: 'dell-g5-g5510-2021',
+        productName: 'Dell G5 G5510 2021',
+      );
+
+      KhaltiScope.of(Get.context!).pay(
+          preferences: [PaymentPreference.khalti],
+          config: config,
+          onSuccess: (v) {
+            showCustomSnackBar(
+              color: Colors.green,
+              isTop: true,
+              message: 'Payment successful',
+            );
+          },
+          onFailure: (v) {
+            showCustomSnackBar(
+              color: Colors.green,
+              isTop: true,
+              message: 'Payment successful',
+            );
+          });
+    } catch (e) {}
   }
 
   void addToCart({required Product product, int quantity = 1}) {

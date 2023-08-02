@@ -14,6 +14,7 @@ dependencies:
   shared_preferences: ^2.2.0
   floating_bottom_navigation_bar: ^1.5.2
   image_picker: ^1.0.1
+  khalti_flutter: ^2.2.1
 
 dev_dependencies: 
   flutter_lints: 2.0.2

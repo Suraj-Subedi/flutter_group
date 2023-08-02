@@ -66,6 +66,38 @@ class CartView extends GetView<CartController> {
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                        onPressed: controller.order,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5,
+                                offset: Offset(0, 2),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                'https://web.khalti.com/static/img/logo1.png',
+                                width: 100,
+                              ),
+                              const Text(
+                                'Pay with Khalti',
+                              )
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
