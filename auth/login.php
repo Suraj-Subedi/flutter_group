@@ -19,7 +19,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         $user = mysqli_fetch_assoc($users);
         $password_hash = $user['password'];
         if (password_verify($password, $password_hash)) {
-            login($user['user_id']);
+            login($user['user_id'], $user['role']);
         } else {
             echo json_encode(
                 [

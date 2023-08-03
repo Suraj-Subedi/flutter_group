@@ -78,14 +78,12 @@ function isAdmin($token)
 
 //function for logging in a user
 
-function login($userId)
+function login($userId, $role)
 {
     global $con;
 
     //generating a random token for logged in user
     $token = bin2hex(openssl_random_pseudo_bytes(16));
-
-
 
     //inserting the token into the database
     $sql = "INSERT INTO personal_access_token (user_id, token) VALUES ('$userId', '$token')";
@@ -96,7 +94,8 @@ function login($userId)
             [
                 "status" => 200,
                 "message" => "User logged in successfully",
-                "token" => $token
+                "token" => $token,
+                "role" => $role
             ]
         );
     } else {

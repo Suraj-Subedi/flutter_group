@@ -4,7 +4,7 @@ include 'helper_functions\AuthenicationFunction.php';
 
 
 
-$sql = "select * from products";
+$sql = "select * from products join categories on products.category_id = categories.category_id";
 $result = mysqli_query($con, $sql);
 
 if ($result) {

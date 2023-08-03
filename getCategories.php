@@ -4,7 +4,7 @@ include 'helper_functions\AuthenicationFunction.php';
 
 
 
-$sql = "select * from categories";
+$sql = "select * from categories order by category_id desc";
 $result = mysqli_query($con, $sql);
 
 if ($result) {
