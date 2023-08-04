@@ -116,82 +116,98 @@ class CartItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<CartController>();
-    return Container(
-      margin: const EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      height: 150,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Image.network(
-              getImageUrl(
-                cartItem.product.imageUrl,
+    return Stack(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          height: 150,
+          child: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Image.network(
+                  getImageUrl(
+                    cartItem.product.imageUrl,
+                  ),
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
               ),
-              height: 150,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          Expanded(
-              flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    cartItem.product.title ?? '',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Rs.${cartItem.product.price ?? ''}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          controller.decreaseQuantity(index);
-                          // controller.decrementQuantity(cartItem);
-                        },
-                        icon: const Icon(Icons.remove),
-                      ),
                       Text(
-                        cartItem.quantity.toString(),
+                        cartItem.product.title ?? '',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          controller.increaseQuantity(index);
-                        },
-                        icon: const Icon(Icons.add),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Rs.${cartItem.product.price ?? ''}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              controller.decreaseQuantity(index);
+                              // controller.decrementQuantity(cartItem);
+                            },
+                            icon: const Icon(Icons.remove),
+                          ),
+                          Text(
+                            cartItem.quantity.toString(),
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              controller.increaseQuantity(index);
+                            },
+                            icon: const Icon(Icons.add),
+                          ),
+                        ],
                       ),
                     ],
-                  ),
-                ],
-              ))
-        ],
-      ),
+                  ))
+            ],
+          ),
+        ),
+        Positioned(
+          right: 0,
+          child: IconButton(
+              onPressed: () {
+                controller.removeFromCart(cartItem: cartItem);
+              },
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              )),
+        )
+      ],
     );
   }
 }
