@@ -10,6 +10,7 @@ if (!isset($_POST['token'])) {
     ]);
     exit;
 }
+$token = $_POST['token'];
 $userId = getUserWithToken($token);
 if (!$userId) {
     echo json_encode([
@@ -29,7 +30,7 @@ if (!isset($_POST['orders'])  || !isset($_POST['amount'])) {
 }
 
 
-$token = $_POST['token'];
+
 $orders = $_POST['orders'];
 $amount = $_POST['amount'];
 
