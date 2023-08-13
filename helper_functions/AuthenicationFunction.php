@@ -3,7 +3,7 @@ include_once 'DatabaseConfig.php';
 
 //function for registering a user 
 
-function register($fullname, $email, $password)
+function register($fullname, $email, $password, $role)
 {
     global $con;
 
@@ -12,7 +12,7 @@ function register($fullname, $email, $password)
 
 
     //inserting the user into the database
-    $sql = "INSERT INTO users (full_name, email, password,role) VALUES ('$fullname', '$email', '$encrypted_password','user')";
+    $sql = "INSERT INTO users (full_name, email, password,role) VALUES ('$fullname', '$email', '$encrypted_password','$role')";
     $result = mysqli_query($con, $sql);
 
     //checking if the user is inserted or not

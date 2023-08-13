@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             return;
         }
 
-        $result =  register($fullname, $email, $password);
+        $result =  register($fullname, $email, $password, 'user');
 
         if ($result) {
             echo json_encode([
