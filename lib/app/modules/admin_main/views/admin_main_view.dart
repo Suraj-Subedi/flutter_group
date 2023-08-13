@@ -19,7 +19,7 @@ class AdminMainView extends GetView<AdminMainController> {
           currentIndex: controller.currentIndex.value,
           items: [
             FloatingNavbarItem(icon: Icons.home, title: 'Home'),
-            FloatingNavbarItem(icon: Icons.list, title: 'Orders'),
+            FloatingNavbarItem(icon: Icons.people, title: 'Users'),
             FloatingNavbarItem(icon: Icons.shopping_bag, title: 'Products'),
             FloatingNavbarItem(icon: Icons.category, title: 'Categories'),
             FloatingNavbarItem(icon: Icons.person, title: 'Profile'),
