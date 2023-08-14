@@ -119,6 +119,7 @@ class HomeController extends GetxController {
           'token': sharedPref.getString('token'),
           'title': titleController.text
         });
+
         var data = jsonDecode(response.body);
         if (data['status'] == 200) {
           Get.back();
@@ -128,6 +129,31 @@ class HomeController extends GetxController {
           showCustomSnackBar(
               message: data['message'], color: Colors.red, isTop: true);
         }
+      }
+    } catch (e) {
+      Get.showSnackbar(const GetSnackBar(
+        message: 'Something went wrong',
+      ));
+    }
+  }
+
+  Future<void> deleteCategory({required String categoryId}) async {
+    try {
+      var url = Uri.http(baseUrl, 'ecom_api/deleteCategory');
+
+      var response = await http.post(url, body: {
+        'token': sharedPref.getString('token'),
+        'categoryId': categoryId
+      });
+      print(response.body);
+      var data = jsonDecode(response.body);
+      if (data['status'] == 200) {
+        Get.back();
+        getCategories();
+        showCustomSnackBar(message: data['message'], color: Colors.green);
+      } else {
+        showCustomSnackBar(
+            message: data['message'], color: Colors.red, isTop: true);
       }
     } catch (e) {
       Get.showSnackbar(const GetSnackBar(

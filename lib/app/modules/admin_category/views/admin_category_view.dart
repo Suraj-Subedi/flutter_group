@@ -54,6 +54,7 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<HomeController>();
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.symmetric(
@@ -83,7 +84,31 @@ class CategoryCard extends StatelessWidget {
             ),
           ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Delete Category'),
+                    content:
+                        Text('Are you sure ,you want to delete this category'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          controller.deleteCategory(
+                              categoryId: category.categoryId.toString());
+                        },
+                        child: Text('Yes'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: Text('No'),
+                      ),
+                    ],
+                  ),
+                );
+              },
               icon: const Icon(
                 Icons.delete,
                 color: Colors.red,

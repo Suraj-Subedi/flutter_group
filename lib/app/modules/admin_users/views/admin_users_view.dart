@@ -98,12 +98,12 @@ class UserCard extends StatelessWidget {
               ),
             ],
           ),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.red,
-              ))
+          // IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(
+          //       Icons.delete,
+          //       color: Colors.red,
+          //     ))
         ],
       ),
     );
