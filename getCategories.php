@@ -4,7 +4,7 @@ include 'helper_functions\AuthenicationFunction.php';
 
 
 
-$sql = "select * from categories order by category_id desc";
+$sql = "select * from categories where isDeleted=0 order by category_id desc ";
 $result = mysqli_query($con, $sql);
 
 if ($result) {
