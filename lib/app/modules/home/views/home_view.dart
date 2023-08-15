@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecom/app/components/my_button.dart';
 import 'package:flutter_ecom/app/components/product_card.dart';
+import 'package:flutter_ecom/app/components/search_product_card.dart';
+import 'package:flutter_ecom/app/models/product.dart';
 
 import 'package:get/get.dart';
 
@@ -14,6 +16,13 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Whisper Book'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  showSearch(context: context, delegate: SearchView());
+                },
+                icon: Icon(Icons.search))
+          ],
         ),
         body: SingleChildScrollView(
           child: GetBuilder<HomeController>(builder: (controller) {
@@ -111,5 +120,49 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ));
+  }
+}
+
+var homeController = Get.find<HomeController>();
+
+class SearchView extends SearchDelegate {
+  List<Product> suggestions = [];
+  var products = homeController.products;
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [IconButton(onPressed: () {}, icon: Icon(Icons.clear))];
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    return buildSuggestions(context);
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    suggestions = products!
+        .where((element) =>
+            element.title!.toLowerCase().contains(query.trim().toLowerCase()) ||
+            element.price.toString().contains(query.trim().toLowerCase()) ||
+            (element.category?.contains(query.trim().toLowerCase()) ?? false))
+        .toList();
+    return ListView.builder(
+        itemCount: suggestions.length,
+        itemBuilder: (context, index) => ListTile(
+              title: SearchProductCard(
+                product: suggestions[index],
+              ),
+            ));
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: Icon(Icons.arrow_back));
   }
 }

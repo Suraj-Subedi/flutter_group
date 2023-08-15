@@ -32,7 +32,39 @@ class ProductDetailView extends GetView<ProductDetailController> {
                 ),
                 Expanded(
                   flex: 2,
-                  child: Container(),
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          product.title ?? '',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          product.description ?? '',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.normal),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Rs. ${product.price}',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
