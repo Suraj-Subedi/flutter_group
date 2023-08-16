@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecom/app/components/my_button.dart';
 import 'package:flutter_ecom/app/components/my_textfield.dart';
 import 'package:flutter_ecom/app/models/user.dart';
+import 'package:flutter_ecom/app/utils/constants.dart';
 
 import 'package:get/get.dart';
 
@@ -97,6 +98,12 @@ class UserCard extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          Image.network(
+            getAvatar(
+              name: user.fullName ?? '',
+            ),
+            height: 50,
           ),
           // IconButton(
           //     onPressed: () {},

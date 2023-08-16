@@ -3,6 +3,7 @@ import 'package:flutter_ecom/app/components/my_button.dart';
 import 'package:flutter_ecom/app/components/product_card.dart';
 import 'package:flutter_ecom/app/components/search_product_card.dart';
 import 'package:flutter_ecom/app/models/product.dart';
+import 'package:flutter_ecom/app/routes/app_pages.dart';
 
 import 'package:get/get.dart';
 
@@ -52,22 +53,28 @@ class HomeView extends GetView<HomeController> {
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.categories!.length,
-                        itemBuilder: (context, index) => Container(
-                              margin: const EdgeInsets.only(right: 15),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 3,
-                                horizontal: 15,
-                              ),
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.blue.withOpacity(0.8)),
-                              child: Text(
-                                controller.categories![index].categoryTitle ??
-                                    '',
-                                style: const TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.white,
+                        itemBuilder: (context, index) => GestureDetector(
+                              onTap: () {
+                                Get.toNamed(Routes.DETAIL_CATEGORY,
+                                    arguments: controller.categories![index]);
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 15),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 3,
+                                  horizontal: 15,
+                                ),
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.blue.withOpacity(0.8)),
+                                child: Text(
+                                  controller.categories![index].categoryTitle ??
+                                      '',
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             )),

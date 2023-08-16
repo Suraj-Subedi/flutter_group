@@ -14,6 +14,8 @@ import '../modules/admin_users/bindings/admin_users_binding.dart';
 import '../modules/admin_users/views/admin_users_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
+import '../modules/detail_category/bindings/detail_category_binding.dart';
+import '../modules/detail_category/views/detail_category_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -106,6 +108,11 @@ class AppPages {
       name: _Paths.ADMIN_USERS,
       page: () => const AdminUsersView(),
       binding: AdminUsersBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_CATEGORY,
+      page: () => const DetailCategoryView(),
+      binding: DetailCategoryBinding(),
     ),
   ];
 }

@@ -10,6 +10,11 @@ var getImageUrl = (imageUrl) {
   return 'http://$ipAddress/ecom_api/$imageUrl';
 };
 
+String getAvatar({required String name, Color? color}) {
+  var splitName = name.split(' ');
+  return 'http://ui-avatars.com/api/?name=${splitName.first.characters}&length=2&format=png&rounded=true&size=256&background=${color ?? '0096FF'}&color=${color ?? 'FFFFFF'}';
+}
+
 var showCustomSnackBar = (
         {required String message, Color? color, bool isTop = false}) =>
     Get.showSnackbar(GetSnackBar(
