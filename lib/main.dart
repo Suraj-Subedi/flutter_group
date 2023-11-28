@@ -1,59 +1,41 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter_ecom/app/modules/cart/controllers/cart_controller.dart';
+import 'package:flutter_ecom/app/utils/memory_management.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
+import 'package:get/get.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+import 'app/routes/app_pages.dart';
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MemoryManagement.init();
+  Get.put(CartController(), permanent: true);
+  var token = MemoryManagement.getAccessToken();
+  var role = MemoryManagement.getRole();
 
-class _MyAppState extends State<MyApp> {
-  int count = 0;
-  String title = 'My Appbar';
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title), centerTitle: true),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              "You have clicked this many time",
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              count.toString(),
-              style: TextStyle(
-                fontSize: 40.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
+  runApp(
+    KhaltiScope(
+      publicKey: 'test_public_key_dde0878862604f24b2475a9806c833d2',
+      builder: (context, navigatorKey) => GetMaterialApp(
+        navigatorKey: navigatorKey,
+        debugShowCheckedModeBanner: false,
+        title: "Application",
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('ne', 'NP'),
+        ],
+        localizationsDelegates: const [
+          KhaltiLocalizations.delegate,
+        ],
+        // home: const GetStarted(),
+        initialRoute: token == null
+            ? Routes.LOGIN
+            : role == 'admin'
+                ? Routes.ADMIN_MAIN
+                : Routes.MAIN,
+        getPages: AppPages.routes,
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            print("You have clicked this many time");
-            setState(() {
-              title = "You have clicked this many time";
-              count = count + 1;
-            });
-
-            print(count);
-          }),
-    );
-  }
+    ),
+  );
 }
